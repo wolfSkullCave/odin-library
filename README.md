@@ -2,6 +2,13 @@
 
 A simple JavaScript Library app built as part of [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-library) curriculum. This project demonstrates core JavaScript concepts including object constructors, DOM manipulation, and event handling—all wrapped in a clean, interactive UI.
 
+## 📷 View Demo
+
+*(Screenshot coming soon)*
+
+[Link to demo](https://wolfskullcave.github.io/odin-library/)
+
+
 ## 🚀 Features
 
 - **Add New Books**  
