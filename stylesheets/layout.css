@@ -1,0 +1,11 @@
+.outer-container {
+    width: 70vw;
+    margin: auto;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    gap: 2vw;
+}
