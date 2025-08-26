@@ -30,12 +30,25 @@ addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, true);
 addBookToLibrary("1984", "George Orwell", 328, false);
 console.log(myLibrary);
 
-myLibrary.forEach(book => {
-  console.log(book.title);
-  console.log(book.author);
-});
+// building/filling out the table with data from myLibrary array
 
-const bookDetails = document.querySelector(".book-details");
-const title = document.createElement("h3");
-title.textContent = "title";
-bookDetails.appendChild(title);
+const tbody = document.querySelector("#bookDetails");
+
+myLibrary.forEach((book) => {
+  // create a row element
+  const row = document.createElement("tr");
+  tbody.appendChild(row);
+
+  // loop over book object getting keys and values
+  for (const [key, value] of Object.entries(book)) {
+    if (key != "id") {
+      // create <td> element
+      const td = document.createElement("td");
+      row.appendChild(td);
+
+      // create a text node for the <td> element
+      const txtVal = document.createTextNode(value);
+      td.appendChild(txtVal);
+    }
+  }
+});
