@@ -6,6 +6,29 @@
 .grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    justify-items: center;
+    /* justify-items: center; */
     gap: 2vw;
+}
+
+/* table styles */
+
+table {
+    border-collapse: collapse;
+    width: auto;
+    border: 1px solid black;
+}
+
+th,
+td {
+    padding: 5px 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #04AA6D;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
