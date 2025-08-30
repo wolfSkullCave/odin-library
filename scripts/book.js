@@ -34,6 +34,7 @@ console.log(myLibrary);
 
 const tbody = document.querySelector("#bookDetails");
 
+// populate tbody with data from myLibrary
 myLibrary.forEach((book) => {
   // create a row element
   const row = document.createElement("tr");
