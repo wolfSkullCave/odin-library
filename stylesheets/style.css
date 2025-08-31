@@ -1,0 +1,12 @@
+.unread,
+.read {
+    font-weight: 600;
+}
+
+td.unread {
+    color: lightblue;
+}
+
+td.read {
+    color: green;
+}
