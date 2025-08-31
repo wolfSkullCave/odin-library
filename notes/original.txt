@@ -1,0 +1,34 @@
+// Populate tbody with data from myLibrary
+myLibrary.forEach((book) => {
+  // Create a table row for each book
+  const row = document.createElement("tr");
+  tbody.appendChild(row);
+
+  // Loop over each property in the book object
+  for (const [key, value] of Object.entries(book)) {
+    if (key != "id") {
+      // Create a table cell for each property
+      const td = document.createElement("td");
+      row.appendChild(td);
+
+      // If the property is 'hasRead', display 'read' or 'unread'
+      if (key == "hasRead") {
+        if (value == true) {
+          // Add "read" to the cell and apply the "read" class
+          const txtVal = document.createTextNode("read");
+          td.appendChild(txtVal);
+          td.classList.add("read");
+        } else {
+          // Add "unread" to the cell and apply the "unread" class
+          const txtVal = document.createTextNode("unread");
+          td.appendChild(txtVal);
+          td.classList.add("unread");
+        }
+      } else {
+        // Add the property value to the cell
+        const txtVal = document.createTextNode(value);
+        td.appendChild(txtVal);
+      }
+    }
+  }
+});

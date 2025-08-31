@@ -1,0 +1,25 @@
+function createBookRow(book) {
+  const row = document.createElement("tr");
+  Object.entries(book).forEach(([key, value]) => {
+    if (key !== "id") {
+      const td = document.createElement("td");
+      if (key === "hasRead") {
+        td.textContent = value ? "read" : "unread";
+        td.classList.add(value ? "read" : "unread");
+      } else {
+        td.textContent = value;
+      }
+      row.appendChild(td);
+    }
+  });
+  return row;
+}
+
+function populateTable(library, tbody) {
+  library.forEach((book) => {
+    const row = createBookRow(book);
+    tbody.appendChild(row);
+  });
+}
+
+populateTable(myLibrary, tbody);
