@@ -1,0 +1,8 @@
+what does the form need to do?
+get the following info:
+- title
+- author
+- number of pages
+- wheather or not the book has been read
+
+

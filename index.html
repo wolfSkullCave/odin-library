@@ -5,28 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Odin Project: Library</title>
     <link rel="stylesheet" href="stylesheets/layout.css" />
-    <link rel="stylesheet" href="stylesheets/fonts.css">
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/fonts.css" />
+    <link rel="stylesheet" href="stylesheets/style.css" />
     <script src="scripts/book.js" defer></script>
   </head>
   <body>
     <div class="outer-container">
       <h1>Library</h1>
-        <div class="book-details">
-          <table>
-            <thead>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Pages</th>
-              <th>Read Status</th>
-            </thead>
-            <tbody id="bookDetails">
-              
+      <div class="book-details">
+        <table>
+          <thead>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Read Status</th>
+          </thead>
+          <tbody id="bookDetails"></tbody>
+        </table>
+      </div>
+      <div class="book-form">
+        <form action="">
+          <fieldset class="form-grid">
+            <label for="title">Book title</label>
+            <input type="text" name="title" id="title" />
 
-            </tbody>
-          </table>
-        </div>
-        <form action=""></form>
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" />
+
+            <label for="pages">Number of pages</label>
+            <input type="text" name="pages" id="pages" />
+          </fieldset>
+
+          <fieldset>
+            <legend>Have you read this book yet?</legend>
+            <!-- <label for="read">Have you read this book yet?</label> -->
+            <input type="radio" name="read" id="read-yes" value="true" />
+            <label for="read-yes">Yes</label>
+            <input type="radio" name="read" id="read-no" value="false" />
+            <label for="read-no">No</label>
+          </fieldset>
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
   </body>

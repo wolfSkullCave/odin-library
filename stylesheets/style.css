@@ -1,3 +1,26 @@
+/* table styles */
+
+table {
+    border-collapse: collapse;
+    width: auto;
+    border: 1px solid black;
+}
+
+th,
+td {
+    padding: 5px 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #04AA6D;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
 .unread,
 .read {
     font-weight: 600;
@@ -9,4 +32,21 @@ td.unread {
 
 td.read {
     color: green;
+}
+
+/* form styling */
+
+form {
+    width: 400px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+button {
+    margin-top: 20px;
 }

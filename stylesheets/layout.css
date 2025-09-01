@@ -9,25 +9,7 @@
     gap: 2vw;
 }
 
-/* table styles */
-
-table {
-    border-collapse: collapse;
-    width: auto;
-    border: 1px solid black;
+div {
+    margin-top: 40px;
 }
 
-th,
-td {
-    padding: 5px 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #04AA6D;
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
