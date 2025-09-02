@@ -38,31 +38,55 @@ console.log(myLibrary);
 
 // Build and fill out the table with data from myLibrary array
 
-// Select the table body element where book rows will be added
-const tbody = document.querySelector("#bookDetails");
-
-// Loop through each book in the library and add a row to the table
-myLibrary.forEach((book) => {
-  // Create a new table row for the current book
-  const row = document.createElement("tr");
-  // Iterate over each property of the book object
-  Object.entries(book).forEach(([key, value]) => {
-    // Skip the 'id' property since it's not displayed in the table
-    if (key !== "id") {
-      // Create a table cell for the current property
-      const td = document.createElement("td");
-      // If the property is 'hasRead', display 'read' or 'unread' and add a class
-      if (key === "hasRead") {
-        td.textContent = value ? "read" : "unread";
-        td.classList.add(value ? "read" : "unread");
-      } else {
-        // For other properties, just display the value
-        td.textContent = value;
+// Function to render the library table
+function renderLibraryTable() {
+  const tbody = document.querySelector("#bookDetails");
+  // Clear existing rows
+  tbody.innerHTML = "";
+  // Loop through each book in the library and add a row to the table
+  myLibrary.forEach((book) => {
+    const row = document.createElement("tr");
+    Object.entries(book).forEach(([key, value]) => {
+      if (key !== "id") {
+        const td = document.createElement("td");
+        if (key === "hasRead") {
+          td.textContent = value ? "read" : "unread";
+          td.classList.add(value ? "read" : "unread");
+        } else {
+          td.textContent = value;
+        }
+        row.appendChild(td);
       }
-      // Append the table cell to the row
-      row.appendChild(td);
-    }
+    });
+    tbody.appendChild(row);
   });
-  // Append the row to the table body
-  tbody.appendChild(row);
-});
+}
+
+// Initial render
+renderLibraryTable();
+
+function parseBool(str) {
+  return String(str).toLowerCase() === "true";
+}
+
+// Adding a book via the new book form
+const newBookForm = document.getElementById("bookForm");
+
+if (newBookForm) {
+  newBookForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent page reload
+    // Get form values
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pages = document.getElementById("pages").value;
+    const readStatus = document.querySelector(
+      'input[name="read"]:checked'
+    ).value;
+    // Add book to library
+    addBookToLibrary(title, author, pages, parseBool(readStatus));
+    // Update the book table
+    renderLibraryTable();
+    // Clear form
+    newBookForm.reset();
+  });
+}
