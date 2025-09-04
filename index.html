@@ -10,43 +10,40 @@
     <script src="scripts/book.js" defer></script>
   </head>
   <body>
-    <div class="outer-container">
-      <h1>Library</h1>
-      <div class="book-details">
-        <table>
-          <thead>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Pages</th>
-            <th>Read Status</th>
-          </thead>
-          <tbody id="bookDetails"></tbody>
-        </table>
+    <div class="container">
+      <div class="header">header</div>
+      <div class="sidebar">
+        <div class="book-form">
+          <h3>New book form</h3>
+          <form action="" id="bookForm">
+            <fieldset class="form-grid">
+              <label for="title">Book title</label>
+              <input type="text" name="title" id="title" />
+
+              <label for="author">Author</label>
+              <input type="text" name="author" id="author" />
+
+              <label for="pages">Number of pages</label>
+              <input type="text" name="pages" id="pages" />
+            </fieldset>
+
+            <fieldset>
+              <legend>Have you read this book yet?</legend>
+              <!-- <label for="read">Have you read this book yet?</label> -->
+              <input type="radio" name="read" id="read-yes" value="true" />
+              <label for="read-yes">Yes</label>
+              <input type="radio" name="read" id="read-no" value="false" />
+              <label for="read-no">No</label>
+            </fieldset>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
-      <div class="book-form">
-        <form action="" id="bookForm">
-          <fieldset class="form-grid">
-            <label for="title">Book title</label>
-            <input type="text" name="title" id="title" />
-
-            <label for="author">Author</label>
-            <input type="text" name="author" id="author" />
-
-            <label for="pages">Number of pages</label>
-            <input type="text" name="pages" id="pages" />
-          </fieldset>
-
-          <fieldset>
-            <legend>Have you read this book yet?</legend>
-            <!-- <label for="read">Have you read this book yet?</label> -->
-            <input type="radio" name="read" id="read-yes" value="true" />
-            <label for="read-yes">Yes</label>
-            <input type="radio" name="read" id="read-no" value="false" />
-            <label for="read-no">No</label>
-          </fieldset>
-          <button type="submit">Submit</button>
-        </form>
+      <div class="main">
+        <h1>Library</h1>
+        <div class="book-list"></div>
       </div>
+      <div class="footer">footer</div>
     </div>
   </body>
 </html>

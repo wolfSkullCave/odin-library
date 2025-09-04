@@ -34,42 +34,54 @@ addBookToLibrary.prototype.info = function () {
 
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, true);
 addBookToLibrary("1984", "George Orwell", 328, false);
-console.log(myLibrary);
 
-// Build and fill out the table with data from myLibrary array
+// Initial render
 
-// Function to render the library table
-function renderLibraryTable() {
-  const tbody = document.querySelector("#bookDetails");
-  // Clear existing rows
-  tbody.innerHTML = "";
-  // Loop through each book in the library and add a row to the table
+function renderLibraryCards() {
+  const bookList = document.querySelector(".book-list");
+
   myLibrary.forEach((book) => {
-    const row = document.createElement("tr");
-    Object.entries(book).forEach(([key, value]) => {
-      if (key !== "id") {
-        const td = document.createElement("td");
-        if (key === "hasRead") {
-          td.textContent = value ? "read" : "unread";
-          td.classList.add(value ? "read" : "unread");
-        } else {
-          td.textContent = value;
-        }
-        row.appendChild(td);
-      }
-    });
-    tbody.appendChild(row);
+    const bookCard = document.createElement("div");
+
+    const title = document.createElement("h3");
+    const author = document.createElement("p");
+    const pages = document.createElement("p");
+    const status = document.createElement("p");
+    const btnRead = document.createElement("button");
+    const btnDel = document.createElement("button");
+
+    title.textContent = book.title;
+    author.textContent = "Author: " + book.author;
+    pages.textContent = "Pages: " + book.noPages;
+    status.textContent = "Status: " + book.hasRead;
+    btnRead.textContent = "Toggle Read";
+    btnDel.textContent = "Delete";
+
+    bookList.appendChild(bookCard);
+    bookCard.appendChild(title);
+    bookCard.appendChild(author);
+    bookCard.appendChild(pages);
+    bookCard.appendChild(status);
+    bookCard.appendChild(btnRead);
+    bookCard.appendChild(btnDel);
+
+    bookCard.classList.add("book-card");
+    btnRead.classList.add("toggle-read");
+    btnDel.classList.add("delete-book");
+
+    btnRead.type = "button";
+    btnDel.type = "button";
   });
 }
 
-// Initial render
-renderLibraryTable();
+renderLibraryCards();
+
+// Adding a book via the new book form
 
 function parseBool(str) {
   return String(str).toLowerCase() === "true";
 }
 
-// Adding a book via the new book form
 const newBookForm = document.getElementById("bookForm");
 
 if (newBookForm) {
@@ -85,7 +97,7 @@ if (newBookForm) {
     // Add book to library
     addBookToLibrary(title, author, pages, parseBool(readStatus));
     // Update the book table
-    renderLibraryTable();
+    renderLibraryCards();
     // Clear form
     newBookForm.reset();
   });
