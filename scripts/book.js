@@ -35,51 +35,99 @@ addBookToLibrary.prototype.info = function () {
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, true);
 addBookToLibrary("1984", "George Orwell", 328, false);
 
-// Initial render
+// Render books to web page
 
-function renderLibraryCards() {
+function toggleReadStatus(id) {
+  // Toggle the read status of books
+  const bookId = id.dataset.id;
+  const book = myLibrary.find((b) => b.id === bookId);
+  book.toggleRead();
+}
+
+function renderLibraryCards(book) {
+  // This function Creates a layout card for a book item from
+  // the myLibrary array
+
+  // Getting references for elements
   const bookList = document.querySelector(".book-list");
+  const bookCard = document.createElement("div");
+  const title = document.createElement("h3");
+  const author = document.createElement("p");
+  const pages = document.createElement("p");
+  const status = document.createElement("p");
+  const btnRead = document.createElement("button");
+  const btnDel = document.createElement("button");
 
-  myLibrary.forEach((book) => {
-    const bookCard = document.createElement("div");
+  // Adding text content to elements
+  title.textContent = book.title;
+  author.textContent = "Author: " + book.author;
+  pages.textContent = "Pages: " + book.noPages;
+  status.textContent = "Status: " + book.hasRead;
+  btnRead.textContent = "Toggle Read";
+  btnDel.textContent = "Delete";
 
-    const title = document.createElement("h3");
-    const author = document.createElement("p");
-    const pages = document.createElement("p");
-    const status = document.createElement("p");
-    const btnRead = document.createElement("button");
-    const btnDel = document.createElement("button");
+  // Adding elements to web page DOM
+  bookList.appendChild(bookCard);
+  bookCard.appendChild(title);
+  bookCard.appendChild(author);
+  bookCard.appendChild(pages);
+  bookCard.appendChild(status);
+  bookCard.appendChild(btnRead);
+  bookCard.appendChild(btnDel);
 
-    title.textContent = book.title;
-    author.textContent = "Author: " + book.author;
-    pages.textContent = "Pages: " + book.noPages;
-    status.textContent = "Status: " + book.hasRead;
-    btnRead.textContent = "Toggle Read";
-    btnDel.textContent = "Delete";
+  // Adding classes to elements
+  bookCard.classList.add("book-card");
+  status.classList.add("status");
+  btnRead.classList.add("toggle-read");
+  btnDel.classList.add("delete-book");
 
-    bookList.appendChild(bookCard);
-    bookCard.appendChild(title);
-    bookCard.appendChild(author);
-    bookCard.appendChild(pages);
-    bookCard.appendChild(status);
-    bookCard.appendChild(btnRead);
-    bookCard.appendChild(btnDel);
+  // Adding types to button elements
+  btnRead.type = "button";
+  btnDel.type = "button";
 
-    bookCard.classList.add("book-card");
-    btnRead.classList.add("toggle-read");
-    btnDel.classList.add("delete-book");
+  // Adding an Identifier to each book in the DOM
+  bookCard.id = book.id;
+  btnRead.dataset.id = book.id;
+  btnDel.dataset.id = book.id;
 
-    btnRead.type = "button";
-    btnDel.type = "button";
+  // Add functions to buttons
+  btnRead.addEventListener("click", function () {
+    const bookId = this.dataset.id;
+    const book = myLibrary.find((b) => b.id === bookId);
+
+    book.toggleRead();
+
+    // Update DOM
+    const statusElem = this.parentElement.querySelector(".status");
+    statusElem.textContent = "Status: " + book.hasRead;
+  });
+
+  btnDel.addEventListener("click", function () {
+    const bookId = this.dataset.id;
+    const index = myLibrary.findIndex((book) => book.id === bookId);
+
+    if (index !== -1) {
+      myLibrary.splice(index, 1);
+    }
+
+    // Update DOM
+    document.querySelector(`#${CSS.escape(bookId)}`).remove();
   });
 }
 
-renderLibraryCards();
+myLibrary.forEach((book) => {
+  renderLibraryCards(book);
+});
 
-// Adding a book via the new book form
+// Adding new books to the array
 
 function parseBool(str) {
+  // Converts booleans into strings
   return String(str).toLowerCase() === "true";
+}
+
+function clearBookList() {
+  document.querySelector(".book-list").innerHTML = "";
 }
 
 const newBookForm = document.getElementById("bookForm");
@@ -87,6 +135,7 @@ const newBookForm = document.getElementById("bookForm");
 if (newBookForm) {
   newBookForm.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent page reload
+
     // Get form values
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
@@ -94,10 +143,17 @@ if (newBookForm) {
     const readStatus = document.querySelector(
       'input[name="read"]:checked'
     ).value;
+
     // Add book to library
     addBookToLibrary(title, author, pages, parseBool(readStatus));
-    // Update the book table
-    renderLibraryCards();
+
+    // Render new book to web page
+    clearBookList();
+    // renderLibraryCards();
+    myLibrary.forEach((book) => {
+      renderLibraryCards(book);
+    });
+
     // Clear form
     newBookForm.reset();
   });

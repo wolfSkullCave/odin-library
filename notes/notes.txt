@@ -1,25 +1,6 @@
-function createBookRow(book) {
-  const row = document.createElement("tr");
-  Object.entries(book).forEach(([key, value]) => {
-    if (key !== "id") {
-      const td = document.createElement("td");
-      if (key === "hasRead") {
-        td.textContent = value ? "read" : "unread";
-        td.classList.add(value ? "read" : "unread");
-      } else {
-        td.textContent = value;
-      }
-      row.appendChild(td);
-    }
-  });
-  return row;
-}
+array of books = [book1, book2, book3]
 
-function populateTable(library, tbody) {
-  library.forEach((book) => {
-    const row = createBookRow(book);
-    tbody.appendChild(row);
-  });
-}
-
-populateTable(myLibrary, tbody);
+- method to render the books onto a webpage
+- method to add books to the array
+- method to change the read status of books
+- method to delete/remove books from the array

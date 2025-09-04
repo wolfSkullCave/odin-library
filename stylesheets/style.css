@@ -3,41 +3,17 @@
     --primary: blue;
 }
 
-/* table styles */
+/* book cards */
 
-table {
-    border-collapse: collapse;
-    width: auto;
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.book-card {
+    flex: 1 1 200px; /* flex-grow flex-shrink flex-basis */
     border: 1px solid black;
+    padding: 1rem;
+    background-color: white;
 }
-
-th,
-td {
-    padding: 5px 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #04AA6D;
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.unread,
-.read {
-    font-weight: 600;
-}
-
-td.unread {
-    color: lightblue;
-}
-
-td.read {
-    color: green;
-}
-
-/* form styling */
-
