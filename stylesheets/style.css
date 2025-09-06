@@ -3,6 +3,10 @@
     --primary: blue;
 }
 
+header {
+    text-align: center;
+}
+
 /* book cards */
 
 .book-list {
@@ -12,8 +16,30 @@
 }
 
 .book-card {
-    flex: 1 1 200px; /* flex-grow flex-shrink flex-basis */
+    flex: 1 1 200px;
+    /* flex-grow flex-shrink flex-basis */
     border: 1px solid black;
     padding: 1rem;
     background-color: white;
+}
+
+/* sidebar form*/
+
+fieldset.form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+fieldset.readStatus {
+    margin: 10px 0;
+}
+
+/* buttons */
+button {
+    background: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
 }
