@@ -34,6 +34,7 @@ addBookToLibrary.prototype.info = function () {
 
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, true);
 addBookToLibrary("1984", "George Orwell", 328, false);
+addBookToLibrary("Unsouled", "Will Wight", 384, true);
 
 // Render books to web page
 
@@ -78,8 +79,8 @@ function renderLibraryCards(book) {
   // Adding classes to elements
   bookCard.classList.add("book-card");
   status.classList.add("status");
-  btnRead.classList.add("toggle-read");
-  btnDel.classList.add("delete-book");
+  btnRead.classList.add("btn-togRead");
+  btnDel.classList.add("btn-delBook");
 
   // Adding types to button elements
   btnRead.type = "button";

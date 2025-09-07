@@ -1,0 +1,48 @@
+{
+  "library": [
+    {
+      "title": "Cradle",
+      "author": "Will Wight",
+      "format": "Kindle Edition",
+      "read": true
+    },
+    {
+      "title": "The Legend of Drizzt",
+      "author": "R.A. Salvatore",
+      "format": "Kindle Edition",
+      "read": true
+    },
+    {
+      "title": "Mistborn",
+      "author": "Brandon Sanderson",
+      "format": "Kindle Edition",
+      "read": true
+    },
+    {
+      "title": "Sleep Sound with Richard Armitage",
+      "author": "Richard Armitage",
+      "format": "Audible Audiobook",
+      "read": false
+    },
+    {
+      "title": "Absolute Superman (2024-): Issues",
+      "author": "Jason Aaron",
+      "format": "Kindle Edition"
+    },
+    {
+      "title": "The Linux Programming Interface",
+      "author": "Michael Kerrisk",
+      "format": "Kindle Edition"
+    },
+    {
+      "title": "Blindsight (Firefall Book 1)",
+      "author": "Peter Watts",
+      "format": "Kindle Edition"
+    },
+    {
+      "title": "Leviathan Wakes",
+      "author": "James S. A. Corey",
+      "format": "Kindle Edition"
+    }
+  ]
+}

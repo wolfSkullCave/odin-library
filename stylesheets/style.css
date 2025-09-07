@@ -18,8 +18,10 @@ header {
 .book-card {
     flex: 1 1 200px;
     /* flex-grow flex-shrink flex-basis */
-    border: 1px solid black;
+    max-width: 33%;
     padding: 1rem;
+    border: 1px solid black;
+    border-radius: 15px;
     background-color: white;
 }
 
@@ -42,4 +44,8 @@ button {
     color: white;
     padding: 5px 10px;
     border-radius: 3px;
+}
+
+.btn-delBook {
+    margin-left: 10px;
 }
