@@ -10,7 +10,8 @@ header {
 /* book cards */
 
 .div-readingList,
-.div-bookCollection {
+.div-bookCollection,
+.div-collectionList {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
