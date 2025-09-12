@@ -1,3 +1,12 @@
+/** 
+* library.js
+* ----------
+* Purpose:
+*   Creates book objects, adds them to a library array object and then saves the
+*   library array object to local storage.
+*/
+
+
 function Library(...books) {
   // Library object
 

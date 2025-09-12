@@ -1,3 +1,11 @@
+/**
+ * renderLibrary.js
+ * ----------------
+ * Purpose:
+ *  Loads an array of book objects from local storage (see library.js) and renders them to the DOM
+ *  via the RenderLibrary object.
+ */
+
 const library = JSON.parse(localStorage.getItem("myBooks"));
 
 const list_1 = document.querySelector(".div-readingList");
