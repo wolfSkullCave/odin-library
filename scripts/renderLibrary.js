@@ -60,16 +60,36 @@ RenderLibrary.prototype.renderBooks = function (book) {
   this.bookCard.id = this.book.id;
   this.cardBtnRead.dataset.id = this.book.id;
   this.cardBtnDel.dataset.id = this.book.id;
+
+  // Adding classes to elements
+  this.bookCard.classList.add("book-card");
+  this.cardStatus.classList.add("status");
+  this.cardBtnRead.classList.add("btn-togRead");
+  this.cardBtnDel.classList.add("btn-delBook");
 };
 
-library.forEach((book) => {
-  if (!book.readStatus) {
-    const readingList = new RenderLibrary(list_1);
-    readingList.renderList();
-    readingList.renderBooks(book);
-  } else {
-    const collectionList = new RenderLibrary(list_2);
-    collectionList.renderList();
-    collectionList.renderBooks(book);
-  }
-});
+function renderLibrary() {
+  library.forEach((book) => {
+    if (!book.readStatus) {
+      readingList.renderList();
+      readingList.renderBooks(book);
+    } else {
+      collectionList.renderList();
+      collectionList.renderBooks(book);
+    }
+  });
+}
+
+const readingList = new RenderLibrary(list_1);
+const collectionList = new RenderLibrary(list_2);
+
+renderLibrary();
+
+// buttons
+// document.querySelectorAll(".btn-togRead").forEach((btn) => {
+//   btn.addEventListener("click", function () {
+//     const book = library.find((b) => b.id === btn.dataset.id);
+//     book.readStatus = !book.readStatus;
+//     renderLibrary();
+//   });
+// });

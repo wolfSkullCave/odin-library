@@ -1,11 +1,10 @@
-/** 
-* library.js
-* ----------
-* Purpose:
-*   Creates book objects, adds them to a library array object and then saves the
-*   library array object to local storage.
-*/
-
+/**
+ * library.js
+ * ----------
+ * Purpose:
+ *   Creates book objects, adds them to a library array object and then saves the
+ *   library array object to local storage.
+ */
 
 function Library(...books) {
   // Library object
@@ -51,12 +50,24 @@ Book.prototype.changeReadStatus = function () {
   this.readStatus = !this.readStatus;
 };
 
-// Book objects
+Book.prototype.info = function () {
+  // console.log(
+  //   `ID: ${this.id}, Title: ${this.title}, Author: ${this.author}, Pages: ${this.pages}, Read: ${this.readStatus}`
+  // );
+  return `ID: ${this.id}, Title: ${this.title}, Author: ${this.author}, Pages: ${this.pages}, Read: ${this.readStatus}`;
+};
+
+// Creating Book objects
 const drizzt_1 = new Book("Homeland", "R.A. Salvatore", 384, true);
 const hobbit = new Book("The Hobbit", "J.R.R. Tolkien", 310, true);
 const cradle_1 = new Book("Unsouled", "Will Wight", 384, true);
+const Katabasis = new Book("Katabasis", "R.F.KuangR.", 567, false);
 
-// Library objects
-const myLibrary = new Library(drizzt_1, hobbit, cradle_1);
+// Adding Book objects to a Library object and saving the Library object to
+// local storage.
+const myLibrary = new Library(drizzt_1, hobbit, cradle_1, Katabasis);
 myLibrary.saveLibrary();
-// console.log(myLibrary.getLibrary());
+
+
+// Render Library ----------------------------------------------------------
+
