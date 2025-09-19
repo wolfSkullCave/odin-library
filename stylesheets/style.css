@@ -9,12 +9,11 @@ header {
 
 /* book cards */
 
-.div-readingList,
-.div-bookCollection,
-.div-collectionList {
+.book-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
+    margin: 2rem 0;
 }
 
 .book-card {

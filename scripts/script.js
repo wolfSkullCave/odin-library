@@ -65,26 +65,24 @@ function renderLibrary(list, book) {
   cardBtnDel.classList.add("btn-delBook");
 }
 
-const readingList = document.querySelector(".div-readingList");
-const colLibrary = document.querySelector(".div-collectionList");
+// const readingList = document.querySelector(".div-readingList");
+// const colLibrary = document.querySelector(".div-collectionList");
+const bookList = document.querySelector(".book-list");
 
-library.forEach((book) => {
-  //   console.log(book);
-  if (!book.readStatus) {
-    renderLibrary(readingList, book);
-  } else {
-    renderLibrary(colLibrary, book);
-  }
-});
+function renderAllBooks() {
+  library.forEach((book) => {
+    renderLibrary(bookList, book);
+  });
+}
+
+renderAllBooks();
 
 // Button Functions ---------------------------------------------------------
 
 document.querySelector("#refreshList").addEventListener("click", function () {
   console.log("refresh");
-});
-
-document.querySelector(".div-readingList").addEventListener("click", (e) => {
-  if (!e.target.classList.contains(".btn-togRead")) return;
+  bookList.innerHTML = "";
+  renderAllBooks();
 });
 
 document.querySelectorAll(".btn-delBook").forEach((btn) => {
@@ -93,20 +91,19 @@ document.querySelectorAll(".btn-delBook").forEach((btn) => {
   });
 });
 
-document.querySelector(".div-collectionList").addEventListener("click", (e) => {
+document.querySelector(".book-list").addEventListener("click", (e) => {
   if (!e.target.classList.contains("btn-togRead")) return;
 
   console.log(e.target.dataset.id);
 
   const book = library.find((item) => item.id === e.target.dataset.id);
-  console.log(book);
   book.readStatus = !book.readStatus;
-  console.log(book);
+  clearBookList();
+  renderAllBooks();
 });
 
-document.querySelector(".book-list").addEventListener("click", (e) => {
-  if (!e.target.classList.contains("toggle-read")) return;
-
-  const index = parseInt(e.target.dataset.index, 10);
-  toggleReadStatus(index, e.target);
-});
+function clearBookList() {
+  while (bookList.firstChild) {
+    bookList.removeChild(bookList.firstChild);
+  }
+}
