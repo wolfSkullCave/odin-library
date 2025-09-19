@@ -80,26 +80,27 @@ renderAllBooks();
 // Button Functions ---------------------------------------------------------
 
 document.querySelector("#refreshList").addEventListener("click", function () {
-  console.log("refresh");
   bookList.innerHTML = "";
   renderAllBooks();
 });
 
-document.querySelectorAll(".btn-delBook").forEach((btn) => {
-  btn.addEventListener("click", function () {
-    console.log("delete book");
-  });
-});
-
 document.querySelector(".book-list").addEventListener("click", (e) => {
-  if (!e.target.classList.contains("btn-togRead")) return;
-
-  console.log(e.target.dataset.id);
-
   const book = library.find((item) => item.id === e.target.dataset.id);
-  book.readStatus = !book.readStatus;
-  clearBookList();
-  renderAllBooks();
+
+  if (e.target.classList.contains("btn-togRead")) {
+    // Toggle read status
+    book.readStatus = !book.readStatus;
+    clearBookList();
+    renderAllBooks();
+  }
+
+  if (e.target.classList.contains("btn-delBook")) {
+    // Delete a book from the array
+    const index = library.findIndex((b) => b.id === e.target.dataset.id);
+    library.splice(index, 1);
+    clearBookList();
+    renderAllBooks();
+  }
 });
 
 function clearBookList() {
