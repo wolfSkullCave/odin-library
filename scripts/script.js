@@ -70,6 +70,7 @@ function renderLibrary(list, book) {
 const bookList = document.querySelector(".book-list");
 
 function renderAllBooks() {
+  clearBookList();
   library.forEach((book) => {
     renderLibrary(bookList, book);
   });
@@ -90,7 +91,6 @@ document.querySelector(".book-list").addEventListener("click", (e) => {
   if (e.target.classList.contains("btn-togRead")) {
     // Toggle read status
     book.readStatus = !book.readStatus;
-    clearBookList();
     renderAllBooks();
   }
 
@@ -98,7 +98,6 @@ document.querySelector(".book-list").addEventListener("click", (e) => {
     // Delete a book from the array
     const index = library.findIndex((b) => b.id === e.target.dataset.id);
     library.splice(index, 1);
-    clearBookList();
     renderAllBooks();
   }
 });
@@ -108,3 +107,19 @@ function clearBookList() {
     bookList.removeChild(bookList.firstChild);
   }
 }
+
+// Add new book form ----------------------------------------------------------------
+
+document.getElementById("newBookForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const title = document.getElementById("title").value.trim();
+  const author = document.getElementById("author").value.trim();
+  const pages = document.getElementById("pages").value.trim();
+  const read = document.querySelector('input[name="read"]:checked').value;
+
+  const newBook = new Book(title, author, pages, read);
+  library.push(newBook);
+  console.log(newBook);
+  renderAllBooks();
+});
