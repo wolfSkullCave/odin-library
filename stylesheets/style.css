@@ -1,10 +1,19 @@
+@import url(fonts.css);
+
 /* global variables */
 :root {
     --primary: blue;
 }
 
-header {
-    text-align: center;
+
+/* css resets */
+
+h1 {
+    margin: 0;
+}
+
+body {
+    margin: 0;
 }
 
 /* book cards */
@@ -13,17 +22,17 @@ header {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    margin: 2rem 0;
+    margin-top: 2rem;
 }
 
 .book-card {
-    flex: 1 1 200px;
-    /* flex-grow flex-shrink flex-basis */
-    max-width: 33%;
-    padding: 1rem;
     border: 1px solid black;
     border-radius: 15px;
-    background-color: white;
+    padding: 1rem;
+    flex-grow: 1;
+    flex-basis: 265px;
+    max-width: 265px;
+    text-align: center;
 }
 
 /* sidebar form*/
@@ -46,6 +55,7 @@ button {
     padding: 5px 10px;
     border-radius: 3px;
 }
+
 
 .btn-delBook {
     margin-left: 10px;

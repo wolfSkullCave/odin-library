@@ -1,43 +1,42 @@
-body {
-    margin: 0;
-}
-
-.div-content {
-    padding: 1rem min(12vw, 1200px);
-}
-
-.container {
+.grid-container {
     display: grid;
-    grid-template-areas:
-        "header"
-        "main"
-        "sidebar"
-        "footer";
-    grid-template-columns: 1fr;
-    grid-template-rows: 600px 1fr auto auto;
+    grid-template-areas: "header" "main" "footer";
+    grid-template-rows: 400px 1fr auto;
 }
+
 
 .header {
     grid-area: header;
-    background-color: #333;
-    color: white;
+    text-align: center;
     align-content: center;
-}
-
-.sidebar {
-    grid-area: sidebar;
-    background-color: #f4f4f4;
+    background-color: grey;
 }
 
 .main {
     grid-area: main;
-    overflow-y: auto;
-    text-align: center;
+    display: grid;
+    grid-template-areas: "books sidebar";
+    grid-template-columns: 3fr 1fr;
+    column-gap: 4vw;
+    padding: 4vw;
 }
 
+.books {
+    grid-area: books;
+}
 
+.books-heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
 
 .footer {
     grid-area: footer;
-    background-color: #eee;
+    padding: 1vw 4vw;
+    background-color: grey;
+    text-align: center;
 }

@@ -10,7 +10,7 @@ function Book(title, author, pages, readStatus) {
 const drizzt_1 = new Book("Homeland", "R.A. Salvatore", 384, true);
 const hobbit = new Book("The Hobbit", "J.R.R. Tolkien", 310, true);
 const cradle_1 = new Book("Unsouled", "Will Wight", 384, true);
-const Katabasis = new Book("Katabasis", "R.F.KuangR.", 567, false);
+const Katabasis = new Book("Katabasis", "R.F.Kuang R.", 567, false);
 
 const library = [drizzt_1, hobbit, cradle_1, Katabasis];
 
@@ -120,6 +120,6 @@ document.getElementById("newBookForm").addEventListener("submit", function (e) {
 
   const newBook = new Book(title, author, pages, read);
   library.push(newBook);
-  console.log(newBook);
   renderAllBooks();
+  e.reset();
 });

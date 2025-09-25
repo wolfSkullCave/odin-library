@@ -6,7 +6,7 @@
 - Method to delete/remove books from the array ✅
 
 #### Optional
-- Read books from a json file
+- Read books from a json file ❌
 
 ## Design
 

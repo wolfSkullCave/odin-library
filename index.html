@@ -3,59 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Odin Project: Library</title>
-    <link rel="stylesheet" href="stylesheets/layout.css" />
-    <link rel="stylesheet" href="stylesheets/fonts.css" />
     <link rel="stylesheet" href="stylesheets/style.css" />
+    <link rel="stylesheet" href="stylesheets/layout.css" />
+    <title>Library</title>
   </head>
   <body>
-    <div class="container">
+    <div class="grid-container">
       <div class="header">
         <header>
           <h1>My Personal Library</h1>
           <p>Track your reading journey, one book at a time.</p>
         </header>
       </div>
-      <div class="sidebar div-content">
-        <div class="book-form" id="newBookForm">
-          <h3>New book form</h3>
-          <form action="" id="bookForm">
-            <fieldset class="form-grid">
-              <label for="title">Book title</label>
-              <input type="text" name="title" id="title" />
 
-              <label for="author">Author</label>
-              <input type="text" name="author" id="author" />
+      <div class="main">
+        <div class="Books">
+          <div class="books-heading">
+            <h1>My Reading List</h1>
+            <button id="refreshList">Refresh</button>
+          </div>
 
-              <label for="pages">Number of pages</label>
-              <input type="text" name="pages" id="pages" />
-            </fieldset>
+          <div class="book-list"></div>
+        </div>
 
-            <fieldset class="readStatus">
-              <legend>Have you read this book yet?</legend>
-              <!-- <label for="read">Have you read this book yet?</label> -->
-              <input type="radio" name="read" id="read-yes" value="true" />
-              <label for="read-yes">Yes</label>
-              <input type="radio" name="read" id="read-no" value="false" />
-              <label for="read-no">No</label>
-            </fieldset>
-            <button type="submit">Submit</button>
-          </form>
+        <div class="sidebar">
+          <div class="book-form" id="newBookForm">
+            <h3>New book form</h3>
+            <form action="" id="bookForm">
+              <fieldset class="form-grid">
+                <label for="title">Book title</label>
+                <input type="text" name="title" id="title" />
+
+                <label for="author">Author</label>
+                <input type="text" name="author" id="author" />
+
+                <label for="pages">Number of pages</label>
+                <input type="text" name="pages" id="pages" />
+              </fieldset>
+
+              <fieldset class="readStatus">
+                <legend>Have you read this book yet?</legend>
+                <!-- <label for="read">Have you read this book yet?</label> -->
+                <input type="radio" name="read" id="read-yes" value="true" />
+                <label for="read-yes">Yes</label>
+                <input type="radio" name="read" id="read-no" value="false" />
+                <label for="read-no">No</label>
+              </fieldset>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
-      <!-- Main content -->
-      <div class="main div-content">
-        <h1>My Reading List</h1>
-        <button id="refreshList">Refresh</button>
-        <div class="book-list"></div>
-      </div>
 
-      <div class="footer div-content">footer</div>
+      <div class="footer">footer</div>
     </div>
-
-    <!-- <script src="scripts/book.js" defer></script> -->
-    <!-- <script src="scripts/library.js"></script> -->
-    <!-- <script src="scripts/renderLibrary.js"></script> -->
     <script src="scripts/script.js"></script>
   </body>
 </html>
