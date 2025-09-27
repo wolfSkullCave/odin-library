@@ -22,7 +22,7 @@ function renderLibrary(list, book) {
   const cardTitle = document.createElement("h3");
   const cardAuthor = document.createElement("p");
   const cardPages = document.createElement("p");
-  const cardStatus = document.createElement("p");
+  const cardStatus = document.createElement("span");
   const cardBtnRead = document.createElement("button");
   const cardBtnDel = document.createElement("button");
 
@@ -31,23 +31,28 @@ function renderLibrary(list, book) {
   bookCard.appendChild(cardTitle);
   bookCard.appendChild(cardAuthor);
   bookCard.appendChild(cardPages);
-  bookCard.appendChild(cardStatus);
   bookCard.appendChild(cardBtnRead);
   bookCard.appendChild(cardBtnDel);
 
   // Adding text to elements
   cardTitle.textContent = book.title;
-  cardAuthor.textContent = "Author: " + book.author;
-  cardPages.textContent = "Pages: " + book.pages;
-  cardStatus.textContent = "Status: " + book.readStatus;
-  cardBtnRead.textContent = "Toggle Read";
+  cardAuthor.textContent = "by " + book.author;
+  cardPages.textContent = book.pages + ' pages';
   cardBtnDel.textContent = "Delete Book";
+
+  if (book.readStatus === true) {
+    cardBtnRead.textContent = "Read";
+    cardBtnRead.classList.add("bookRead");
+  } else {
+    cardBtnRead.textContent = "Unread";
+    cardBtnRead.classList.add("bookUnread");
+  }
 
   // Adding classes to elements
   bookCard.classList.add("book-card");
-  cardStatus.classList.add("status");
   cardBtnRead.classList.add("btn-togRead");
   cardBtnDel.classList.add("btn-delBook");
+  cardAuthor.classList.add("author");
 
   // Adding types to button elements
   cardBtnRead.type = "button";
@@ -57,12 +62,6 @@ function renderLibrary(list, book) {
   bookCard.id = book.id;
   cardBtnRead.dataset.id = book.id;
   cardBtnDel.dataset.id = book.id;
-
-  // Adding classes to elements
-  bookCard.classList.add("book-card");
-  cardStatus.classList.add("status");
-  cardBtnRead.classList.add("btn-togRead");
-  cardBtnDel.classList.add("btn-delBook");
 }
 
 // const readingList = document.querySelector(".div-readingList");
@@ -121,5 +120,4 @@ document.getElementById("newBookForm").addEventListener("submit", function (e) {
   const newBook = new Book(title, author, pages, read);
   library.push(newBook);
   renderAllBooks();
-  e.reset();
 });
