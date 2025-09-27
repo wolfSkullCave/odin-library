@@ -1,6 +1,8 @@
 :root{
     --primary: #2e4a5b;
     --accent: #d16655;
+    --accent-2: #bd7579;
     --light-grey: #f5f5ff;
-    --beige: #f8ebe5;
+    --bage: #f8ebe5;
+    --text: #505050;
 }

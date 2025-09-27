@@ -1,13 +1,7 @@
 @import url(fonts.css);
 @import url(globals.css);
 
-/* global variables */
-:root {
-    --primary: blue;
-}
-
-
-/* css resets */
+/* css resets --------------------------------------------------------------*/
 
 h1 {
     margin: 0;
@@ -21,7 +15,7 @@ body {
     margin: 0;
 }
 
-/* book cards */
+/* book cards --------------------------------------------------------------*/
 
 .book-list {
     display: flex;
@@ -31,19 +25,67 @@ body {
 }
 
 .book-card {
-    /* border: 1px solid black; */
     border-radius: 15px;
     padding: 2rem 1rem;
     flex-grow: 1;
     max-width: 270px;
     text-align: center;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
-    background-color: white;
+    background-color: var(--bage);
 }
 
-/* sidebar form*/
+.book-card h3 {
+    margin: 0;
+}
 
-fieldset.form-grid {
+.book-card p {
+    font-size: 0.8rem;
+}
+
+.bookRead,
+.bookUnread {
+    min-width: 80px;
+}
+
+.bookUnread {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.bookUnread:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* General buttons ----------------------------------------------------------*/
+
+button {
+    background: var(--accent);
+    color: white;
+    border: 2px solid var(--accent);
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+
+button:hover {
+    background-color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-ghost {
+    margin-left: 10px;
+    background-color: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn-ghost:hover {
+    color: white;
+}
+
+/* sidebar form ---------------------------------------------------------*/
+
+.form-grid {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -52,42 +94,35 @@ fieldset.form-grid {
     padding: 0;
 }
 
-fieldset.readStatus {
+.readStatus {
     margin: 10px 0 20px 0px;
     border: none;
     padding: 0;
 }
 
-div#newBookForm {
-    /* border: 1px solid black; */
-    padding: 1.5vw;
+#newBookForm {
+    padding: 2vw;
     border-radius: 15px;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
-    background-color: white;
+    background-color: var(--primary);
+    color: white;
+}
+
+#newBookForm h3 {
+    color: white;
 }
 
 legend {
     margin-bottom: 10px;
 }
 
-/* buttons */
-button {
-    background: var(--accent);
-    color: white;
-    border: 1px solid var(--accent);
-    padding: 5px 15px;
+input {
     border-radius: 15px;
+    border: 1px solid black;
+    padding: 5px 10px;
 }
 
-button:hover {
-    background-color: var(--primary);
-    border: 1px solid var(--primary);
-}
-
-
-.btn-delBook {
-    margin-left: 10px;
-}
+/* Footer ----------------------------------------------------------------- */
 
 .footer img {
     width: 20px;
@@ -104,26 +139,4 @@ button:hover {
     color: grey;
     font-size: 0.75rem;
     margin: 8px;
-}
-
-
-.book-card h3 {
-    margin: 0;
-}
-
-.book-card p{
-    font-size: 0.8rem;
-}
-
-.btn-togRead{
-    min-width: 80px;
-}
-
-.bookRead, .bookUnread:hover {
-    background-color: green;
-    border: 1px solid;
-}
-
-.bookUnread, .bookRead:hover {
-    background-color: red;
 }

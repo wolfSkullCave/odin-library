@@ -10,10 +10,10 @@
 
 ## Design
 
-- Style the form
-- Style the book cards
-    - Alter the read status element styling to depending on wheather it is 'true' or 'false'
+- Style the form ✅
+- Style the book cards 
+    - Alter the read status element styling to depending on wheather it is 'true' or 'false' ✅
 
 ## Content
-- Fill header
-- Fill footer
+- Fill header ✅
+- Fill footer ✅

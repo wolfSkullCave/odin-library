@@ -37,7 +37,7 @@ function renderLibrary(list, book) {
   // Adding text to elements
   cardTitle.textContent = book.title;
   cardAuthor.textContent = "by " + book.author;
-  cardPages.textContent = book.pages + ' pages';
+  cardPages.textContent = book.pages + " pages";
   cardBtnDel.textContent = "Delete Book";
 
   if (book.readStatus === true) {
@@ -51,6 +51,7 @@ function renderLibrary(list, book) {
   // Adding classes to elements
   bookCard.classList.add("book-card");
   cardBtnRead.classList.add("btn-togRead");
+  cardBtnDel.classList.add("btn-ghost");
   cardBtnDel.classList.add("btn-delBook");
   cardAuthor.classList.add("author");
 
@@ -64,8 +65,6 @@ function renderLibrary(list, book) {
   cardBtnDel.dataset.id = book.id;
 }
 
-// const readingList = document.querySelector(".div-readingList");
-// const colLibrary = document.querySelector(".div-collectionList");
 const bookList = document.querySelector(".book-list");
 
 function renderAllBooks() {
@@ -106,6 +105,7 @@ function clearBookList() {
     bookList.removeChild(bookList.firstChild);
   }
 }
+
 
 // Add new book form ----------------------------------------------------------------
 

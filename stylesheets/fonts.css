@@ -31,7 +31,12 @@ h3 {
 
 
 p,
-.footer a {
+.footer a,
+body {
     font-family: "Poppins-regular", sans-serif;
     font-size: 1rem;
+}
+
+body {
+    color: var(--text);
 }
