@@ -122,6 +122,11 @@ input {
     padding: 5px 10px;
 }
 
+#bookForm button:hover {
+    background-color: white;
+    color: var(--primary);
+}
+
 /* Footer ----------------------------------------------------------------- */
 
 .footer img {
