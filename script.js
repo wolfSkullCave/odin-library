@@ -1,9 +1,40 @@
-function Book(title, author, pages, readStatus) {
-  this.id = crypto.randomUUID(); // generate a unique ID for each book
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.readStatus = readStatus;
+/*
+  scripts/script.js
+
+  Purpose:
+  - Defines a simple Book constructor and an in-memory `library` array.
+  - Renders books into the DOM, handles toggling read status and deleting
+    books, and wires the "Add new book" form to push new Book instances
+    into the `library` and re-render the list.
+
+  Important notes / assumptions:
+  - Expects the following HTML elements to exist: an element with
+    class `.book-list`, a button with id `#refreshList`, and a form with
+    id `#newBookForm` containing inputs with ids `#title`, `#author`,
+    `#pages` and a radio (or similar) named `read`.
+  - Uses `crypto.randomUUID()` to generate IDs (browser environment).
+  - This file mutates global state (`library`) and the DOM directly;
+    it's not exported as a module.
+  - The `read` value retrieved from the form may be a string; other
+    parts of the file treat `readStatus` as a boolean.
+*/
+
+// function Book(title, author, pages, readStatus) {
+//   this.id = crypto.randomUUID(); // generate a unique ID for each book
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.readStatus = readStatus;
+// }
+
+class Book {
+  constructor(title, author, pages, readStatus) {
+    this.id = crypto.randomUUID(); // generate a unique ID for each book
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readStatus = readStatus;
+  }
 }
 
 // Creating Book objects
@@ -15,6 +46,60 @@ const Katabasis = new Book("Katabasis", "R.F.Kuang R.", 567, false);
 const library = [drizzt_1, hobbit, cradle_1, Katabasis];
 
 // Render Library -------------------------------------------------------
+// class Library {
+//   constructor(list, book) {
+//     this.list = list;
+//     this.book = book;
+//   }
+
+//   renderLibrary(list, book) {
+//     // Create HTML elements
+//     const bookCard = document.createElement("div");
+//     const cardTitle = document.createElement("h3");
+//     const cardAuthor = document.createElement("p");
+//     const cardPages = document.createElement("p");
+//     const cardStatus = document.createElement("span");
+//     const cardBtnRead = document.createElement("button");
+//     const cardBtnDel = document.createElement("button");
+
+//     // Add HTML elements to DOM
+//     list.appendChild(bookCard);
+//     bookCard.appendChild(cardTitle);
+//     bookCard.appendChild(cardAuthor);
+//     bookCard.appendChild(cardPages);
+//     bookCard.appendChild(cardBtnRead);
+//     bookCard.appendChild(cardBtnDel);
+
+//     // Adding text to elements
+//     cardTitle.textContent = book.title;
+//     cardAuthor.textContent = "by " + book.author;
+//     cardPages.textContent = book.pages + " pages";
+//     cardBtnDel.textContent = "Delete Book";
+//     if (book.readStatus === true) {
+//       cardBtnRead.textContent = "Read";
+//       cardBtnRead.classList.add("bookRead");
+//     } else {
+//       cardBtnRead.textContent = "Unread";
+//       cardBtnRead.classList.add("bookUnread");
+//     }
+
+//     // Adding classes to elements
+//     bookCard.classList.add("book-card");
+//     cardBtnRead.classList.add("btn-togRead");
+//     cardBtnDel.classList.add("btn-ghost");
+//     cardBtnDel.classList.add("btn-delBook");
+//     cardAuthor.classList.add("author");
+
+//     // Adding types to button elements
+//     cardBtnRead.type = "button";
+//     cardBtnDel.type = "button";
+
+//     // Adding an Identifier to each book in the DOM
+//     bookCard.id = book.id;
+//     cardBtnRead.dataset.id = book.id;
+//     cardBtnDel.dataset.id = book.id;
+//   }
+// }
 
 function renderLibrary(list, book) {
   // Create HTML elements
@@ -67,6 +152,8 @@ function renderLibrary(list, book) {
 
 const bookList = document.querySelector(".book-list");
 
+// const library = new Library(bookList, book);
+
 function renderAllBooks() {
   clearBookList();
   library.forEach((book) => {
@@ -105,7 +192,6 @@ function clearBookList() {
     bookList.removeChild(bookList.firstChild);
   }
 }
-
 
 // Add new book form ----------------------------------------------------------------
 

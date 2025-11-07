@@ -1,3 +1,27 @@
+/*
+  scripts/book.js
+
+  Purpose:
+  - Maintains an in-memory `myLibrary` array of Book objects and provides
+    helper constructors and functions to render the collection to the DOM.
+  - Exposes utilities to add books (`addBookToLibrary`), toggle read status
+    (via `Book.prototype.toggleRead` / `toggleReadStatus`), and render
+    book cards (`renderLibraryCards`, `BookList`).
+
+  Important notes / assumptions:
+  - Expects certain DOM elements to exist (examples used in this file):
+      * `.div-readingList` and `.div-bookCollection` for initial rendering
+      * `.book-list` for list rendering
+      * A form with id `#bookForm` and inputs `#title`, `#author`, `#pages`
+        and a `name="read"` radio or checkbox for read status.
+  - Uses `crypto.randomUUID()` to create unique IDs (browser environment).
+  - The file mutates global state (`myLibrary`) and updates the DOM directly;
+    it is not written as an ES module or exported.
+  - There are some naming inconsistencies in the code (e.g. `noPages` vs
+    `pages`) that are left as-is; consider normalizing to a single property
+    name if you plan to reuse these objects elsewhere.
+*/
+
 // Array to store all book objects
 const myLibrary = [];
 
@@ -84,8 +108,6 @@ BookList.prototype.renderBook = function () {
   this.cardBtnRead.dataset.id = this.book.id;
   this.cardBtnDel.dataset.id = this.book.id;
 };
-
-
 
 const myReadingList = document.querySelector(".div-readingList");
 const myBookCollection = document.querySelector(".div-bookCollection");
