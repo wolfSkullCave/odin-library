@@ -1,31 +1,7 @@
-/*
-  scripts/script.js
-
-  Purpose:
-  - Defines a simple Book constructor and an in-memory `library` array.
-  - Renders books into the DOM, handles toggling read status and deleting
-    books, and wires the "Add new book" form to push new Book instances
-    into the `library` and re-render the list.
-
-  Important notes / assumptions:
-  - Expects the following HTML elements to exist: an element with
-    class `.book-list`, a button with id `#refreshList`, and a form with
-    id `#newBookForm` containing inputs with ids `#title`, `#author`,
-    `#pages` and a radio (or similar) named `read`.
-  - Uses `crypto.randomUUID()` to generate IDs (browser environment).
-  - This file mutates global state (`library`) and the DOM directly;
-    it's not exported as a module.
-  - The `read` value retrieved from the form may be a string; other
-    parts of the file treat `readStatus` as a boolean.
+/* script.js
+Book
+- Stores properties for a book objects
 */
-
-// function Book(title, author, pages, readStatus) {
-//   this.id = crypto.randomUUID(); // generate a unique ID for each book
-//   this.title = title;
-//   this.author = author;
-//   this.pages = pages;
-//   this.readStatus = readStatus;
-// }
 
 class Book {
   constructor(title, author, pages, readStatus) {
@@ -37,173 +13,86 @@ class Book {
   }
 }
 
+// Render Library -------------------------------------------------------
+
+class Library {
+  constructor(books, divList) {
+    this.books = books;
+    this.divList = divList;
+  }
+
+  render() {
+    this.books.map((book) => {
+      // Create HTML elements
+      const bookCard = document.createElement("div");
+      const cardTitle = document.createElement("h3");
+      const cardAuthor = document.createElement("p");
+      const cardPages = document.createElement("p");
+      const cardStatus = document.createElement("span");
+      const cardBtnRead = document.createElement("button");
+      const cardBtnDel = document.createElement("button");
+
+      // Add HTML elements to DOM
+      this.divList.appendChild(bookCard);
+      bookCard.appendChild(cardTitle);
+      bookCard.appendChild(cardAuthor);
+      bookCard.appendChild(cardPages);
+      bookCard.appendChild(cardBtnRead);
+      bookCard.appendChild(cardBtnDel);
+
+      // Adding text to elements
+      cardTitle.textContent = book.title;
+      cardAuthor.textContent = "by " + book.author;
+      cardPages.textContent = book.pages + " pages";
+      cardBtnDel.textContent = "Delete Book";
+      if (book.readStatus === true) {
+        cardBtnRead.textContent = "Read";
+        cardBtnRead.classList.add("bookRead");
+      } else {
+        cardBtnRead.textContent = "Unread";
+        cardBtnRead.classList.add("bookUnread");
+      }
+
+      // Adding classes to elements
+      bookCard.classList.add("book-card");
+      cardBtnRead.classList.add("btn-togRead");
+      cardBtnDel.classList.add("btn-ghost");
+      cardBtnDel.classList.add("btn-delBook");
+      cardAuthor.classList.add("author");
+
+      // Adding types to button elements
+      cardBtnRead.type = "button";
+      cardBtnDel.type = "button";
+
+      // Adding an Identifier to each book in the DOM
+      bookCard.id = book.id;
+      cardBtnRead.dataset.id = book.id;
+      cardBtnDel.dataset.id = book.id;
+    });
+  }
+
+  
+
+  clear() {
+    while (this.divList.firstChild) {
+      this.divList.removeChild(this.divList.firstChild);
+    }
+  }
+
+  listTitles() {
+    return this.books.map((book) => book.title);
+  }
+}
+
 // Creating Book objects
 const drizzt_1 = new Book("Homeland", "R.A. Salvatore", 384, true);
 const hobbit = new Book("The Hobbit", "J.R.R. Tolkien", 310, true);
 const cradle_1 = new Book("Unsouled", "Will Wight", 384, true);
 const Katabasis = new Book("Katabasis", "R.F.Kuang R.", 567, false);
+const divList = document.querySelector(".book-list");
 
-const library = [drizzt_1, hobbit, cradle_1, Katabasis];
+const myLib = new Library([drizzt_1, hobbit, cradle_1, Katabasis], divList);
 
-// Render Library -------------------------------------------------------
-// class Library {
-//   constructor(list, book) {
-//     this.list = list;
-//     this.book = book;
-//   }
-
-//   renderLibrary(list, book) {
-//     // Create HTML elements
-//     const bookCard = document.createElement("div");
-//     const cardTitle = document.createElement("h3");
-//     const cardAuthor = document.createElement("p");
-//     const cardPages = document.createElement("p");
-//     const cardStatus = document.createElement("span");
-//     const cardBtnRead = document.createElement("button");
-//     const cardBtnDel = document.createElement("button");
-
-//     // Add HTML elements to DOM
-//     list.appendChild(bookCard);
-//     bookCard.appendChild(cardTitle);
-//     bookCard.appendChild(cardAuthor);
-//     bookCard.appendChild(cardPages);
-//     bookCard.appendChild(cardBtnRead);
-//     bookCard.appendChild(cardBtnDel);
-
-//     // Adding text to elements
-//     cardTitle.textContent = book.title;
-//     cardAuthor.textContent = "by " + book.author;
-//     cardPages.textContent = book.pages + " pages";
-//     cardBtnDel.textContent = "Delete Book";
-//     if (book.readStatus === true) {
-//       cardBtnRead.textContent = "Read";
-//       cardBtnRead.classList.add("bookRead");
-//     } else {
-//       cardBtnRead.textContent = "Unread";
-//       cardBtnRead.classList.add("bookUnread");
-//     }
-
-//     // Adding classes to elements
-//     bookCard.classList.add("book-card");
-//     cardBtnRead.classList.add("btn-togRead");
-//     cardBtnDel.classList.add("btn-ghost");
-//     cardBtnDel.classList.add("btn-delBook");
-//     cardAuthor.classList.add("author");
-
-//     // Adding types to button elements
-//     cardBtnRead.type = "button";
-//     cardBtnDel.type = "button";
-
-//     // Adding an Identifier to each book in the DOM
-//     bookCard.id = book.id;
-//     cardBtnRead.dataset.id = book.id;
-//     cardBtnDel.dataset.id = book.id;
-//   }
-// }
-
-function renderLibrary(list, book) {
-  // Create HTML elements
-  const bookCard = document.createElement("div");
-  const cardTitle = document.createElement("h3");
-  const cardAuthor = document.createElement("p");
-  const cardPages = document.createElement("p");
-  const cardStatus = document.createElement("span");
-  const cardBtnRead = document.createElement("button");
-  const cardBtnDel = document.createElement("button");
-
-  // Add HTML elements to DOM
-  list.appendChild(bookCard);
-  bookCard.appendChild(cardTitle);
-  bookCard.appendChild(cardAuthor);
-  bookCard.appendChild(cardPages);
-  bookCard.appendChild(cardBtnRead);
-  bookCard.appendChild(cardBtnDel);
-
-  // Adding text to elements
-  cardTitle.textContent = book.title;
-  cardAuthor.textContent = "by " + book.author;
-  cardPages.textContent = book.pages + " pages";
-  cardBtnDel.textContent = "Delete Book";
-
-  if (book.readStatus === true) {
-    cardBtnRead.textContent = "Read";
-    cardBtnRead.classList.add("bookRead");
-  } else {
-    cardBtnRead.textContent = "Unread";
-    cardBtnRead.classList.add("bookUnread");
-  }
-
-  // Adding classes to elements
-  bookCard.classList.add("book-card");
-  cardBtnRead.classList.add("btn-togRead");
-  cardBtnDel.classList.add("btn-ghost");
-  cardBtnDel.classList.add("btn-delBook");
-  cardAuthor.classList.add("author");
-
-  // Adding types to button elements
-  cardBtnRead.type = "button";
-  cardBtnDel.type = "button";
-
-  // Adding an Identifier to each book in the DOM
-  bookCard.id = book.id;
-  cardBtnRead.dataset.id = book.id;
-  cardBtnDel.dataset.id = book.id;
-}
-
-const bookList = document.querySelector(".book-list");
-
-// const library = new Library(bookList, book);
-
-function renderAllBooks() {
-  clearBookList();
-  library.forEach((book) => {
-    renderLibrary(bookList, book);
-  });
-}
-
-renderAllBooks();
-
-// Button Functions ---------------------------------------------------------
-
-document.querySelector("#refreshList").addEventListener("click", function () {
-  bookList.innerHTML = "";
-  renderAllBooks();
-});
-
-document.querySelector(".book-list").addEventListener("click", (e) => {
-  const book = library.find((item) => item.id === e.target.dataset.id);
-
-  if (e.target.classList.contains("btn-togRead")) {
-    // Toggle read status
-    book.readStatus = !book.readStatus;
-    renderAllBooks();
-  }
-
-  if (e.target.classList.contains("btn-delBook")) {
-    // Delete a book from the array
-    const index = library.findIndex((b) => b.id === e.target.dataset.id);
-    library.splice(index, 1);
-    renderAllBooks();
-  }
-});
-
-function clearBookList() {
-  while (bookList.firstChild) {
-    bookList.removeChild(bookList.firstChild);
-  }
-}
-
-// Add new book form ----------------------------------------------------------------
-
-document.getElementById("newBookForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const title = document.getElementById("title").value.trim();
-  const author = document.getElementById("author").value.trim();
-  const pages = document.getElementById("pages").value.trim();
-  const read = document.querySelector('input[name="read"]:checked').value;
-
-  const newBook = new Book(title, author, pages, read);
-  library.push(newBook);
-  renderAllBooks();
-});
+// tests
+console.log(myLib.listTitles());
+myLib.render();
