@@ -1,29 +1,58 @@
-/* script.js
-Purpose:
-- Defines a simple Book and Library class.
-  - Renders books into the DOM, handles toggling read status and deleting
-    books, and wires the "Add new book" form to push new Book instances
-    into the `library` and re-render the list.
-Book
-- Stores properties for a book objects
-Library
-- Constructor:
-  - Accepts an array of books and a div to display them in.
-- Render method: 
-  - Creates and displays DOM elements
-  - Adds event listeners to the buttons
-- Clear
-  - Clears the bookListDiv and re-renders the books array to DOM
-  
+/*
+  script.js
+
+  Purpose
+  - Implements a minimal in-browser Book/Library UI:
+    * `Book` class: a simple data holder for a book record.
+    * `Library` class: manages an array of `Book` instances and renders
+      them into a target DOM container.
+    * Wiring for user interactions: toggling read state, deleting books,
+      refreshing the list, and adding new books via a form.
+
+  Contract (inputs / outputs)
+  - Inputs:
+    * DOM elements expected by the script:
+        - `.book-list` — container where book cards are rendered
+        - `#refreshList` — button to force a re-render
+        - `#newBookForm` — form with inputs `#title`, `#author`, `#pages`
+          and a `name="read"` input to indicate read status
+    * Programmatic inputs: `Book(title, author, pages, read)`
+
+  - Outputs / side-effects:
+    * Mutates DOM by creating/removing/updating book card elements.
+    * Mutates in-memory array of books held inside the `Library` instance.
+
+  Data shapes
+  - Book instance fields:
+    * id: string (UUID from `crypto.randomUUID()`)
+    * title: string
+    * author: string
+    * pages: number (the constructor normalizes the form value to Number)
+    * read: boolean (the constructor coerces the form value to boolean)
+
+  Important notes / assumptions
+  - Runs in a browser (uses `document`, `crypto.randomUUID()`).
+  - This file directly mutates global state and the DOM — it's not an ES
+    module and does not export functions.
+  - There are some type/name inconsistencies between form values (strings)
+    and code expectations (booleans/numbers). Normalizing (parseInt /
+    Boolean conversion) at the point of form submission is recommended.
+  - If you plan to combine with `scripts/book.js`, consider unifying the
+    property names (for example: `pages` vs `noPages`, `read` vs `hasRead`).
+
+  Quick follow-ups (recommended)
+  - Convert `pages` to a Number when creating a `Book`.
+  - Convert `read` (form value) to a boolean before passing it to `Book`.
+  - Normalize property names across the project to avoid subtle bugs.
 */
 
 class Book {
-  constructor(title, author, pages, readStatus) {
+  constructor(title, author, pages, read) {
     this.id = crypto.randomUUID(); // generate a unique ID for each book
     this.title = title;
     this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
+    this.pages = Number(pages);
+    this.read = String(read).toLowerCase() === "true";
   }
 }
 
@@ -59,7 +88,7 @@ class Library {
       cardAuthor.textContent = "by " + book.author;
       cardPages.textContent = book.pages + " pages";
       cardBtnDel.textContent = "Delete Book";
-      if (book.readStatus === true) {
+      if (book.read === true) {
         cardBtnRead.textContent = "Read";
         cardBtnRead.classList.add("bookRead");
       } else {
@@ -86,7 +115,7 @@ class Library {
       // Event listeners
       cardBtnRead.addEventListener("click", (e) => {
         const book = this.books.find((book) => book.id === e.target.dataset.id);
-        book.readStatus = !book.readStatus;
+        book.read = !book.read;
         this.clear();
       });
 
@@ -105,6 +134,11 @@ class Library {
   listTitles() {
     return this.books.map((book) => book.title);
   }
+
+  add(book) {
+    this.books.push(book);
+    this.clear();
+  }
 }
 
 // Creating Book objects
@@ -122,4 +156,16 @@ myLib.render();
 document.querySelector("#refreshList").addEventListener("click", function () {
   myLib.clear();
   // console.log('book list div refreshed')
+});
+
+document.getElementById("newBookForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const title = document.getElementById("title").value.trim();
+  const author = document.getElementById("author").value.trim();
+  const pages = document.getElementById("pages").value.trim();
+  const read = document.querySelector('input[name="read"]:checked').value;
+
+  const newBook = new Book(title, author, pages, read);
+  myLib.add(newBook);
 });

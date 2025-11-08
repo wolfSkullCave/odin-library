@@ -28,12 +28,12 @@
 // }
 
 class Book {
-  constructor(title, author, pages, readStatus) {
+  constructor(title, author, pages, read) {
     this.id = crypto.randomUUID(); // generate a unique ID for each book
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.readStatus = readStatus;
+    this.read = read;
   }
 }
 
@@ -69,7 +69,7 @@ function renderLibrary(list, book) {
   cardAuthor.textContent = "by " + book.author;
   cardPages.textContent = book.pages + " pages";
   cardBtnDel.textContent = "Delete Book";
-  if (book.readStatus === true) {
+  if (book.read === true) {
     cardBtnRead.textContent = "Read";
     cardBtnRead.classList.add("bookRead");
   } else {
@@ -117,7 +117,7 @@ document.querySelector(".book-list").addEventListener("click", (e) => {
 
   if (e.target.classList.contains("btn-togRead")) {
     // Toggle read status
-    book.readStatus = !book.readStatus;
+    book.read = !book.read;
     renderAllBooks();
   }
 
