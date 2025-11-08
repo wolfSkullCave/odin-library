@@ -1,6 +1,20 @@
 /* script.js
+Purpose:
+- Defines a simple Book and Library class.
+  - Renders books into the DOM, handles toggling read status and deleting
+    books, and wires the "Add new book" form to push new Book instances
+    into the `library` and re-render the list.
 Book
 - Stores properties for a book objects
+Library
+- Constructor:
+  - Accepts an array of books and a div to display them in.
+- Render method: 
+  - Creates and displays DOM elements
+  - Adds event listeners to the buttons
+- Clear
+  - Clears the bookListDiv and re-renders the books array to DOM
+  
 */
 
 class Book {
@@ -16,9 +30,9 @@ class Book {
 // Render Library -------------------------------------------------------
 
 class Library {
-  constructor(books, divList) {
+  constructor(books, bookListDiv) {
     this.books = books;
-    this.divList = divList;
+    this.bookListDiv = bookListDiv;
   }
 
   render() {
@@ -33,7 +47,7 @@ class Library {
       const cardBtnDel = document.createElement("button");
 
       // Add HTML elements to DOM
-      this.divList.appendChild(bookCard);
+      this.bookListDiv.appendChild(bookCard);
       bookCard.appendChild(cardTitle);
       bookCard.appendChild(cardAuthor);
       bookCard.appendChild(cardPages);
@@ -68,15 +82,24 @@ class Library {
       bookCard.id = book.id;
       cardBtnRead.dataset.id = book.id;
       cardBtnDel.dataset.id = book.id;
+
+      // Event listeners
+      cardBtnRead.addEventListener("click", (e) => {
+        const book = this.books.find((book) => book.id === e.target.dataset.id);
+        book.readStatus = !book.readStatus;
+        this.clear();
+      });
+
+      cardBtnDel.addEventListener("click", (e) => {
+        this.books = this.books.filter((obj) => obj.id !== e.target.dataset.id);
+        this.clear();
+      });
     });
   }
 
-  
-
   clear() {
-    while (this.divList.firstChild) {
-      this.divList.removeChild(this.divList.firstChild);
-    }
+    this.bookListDiv.innerHTML = "";
+    this.render();
   }
 
   listTitles() {
@@ -89,10 +112,14 @@ const drizzt_1 = new Book("Homeland", "R.A. Salvatore", 384, true);
 const hobbit = new Book("The Hobbit", "J.R.R. Tolkien", 310, true);
 const cradle_1 = new Book("Unsouled", "Will Wight", 384, true);
 const Katabasis = new Book("Katabasis", "R.F.Kuang R.", 567, false);
-const divList = document.querySelector(".book-list");
+const bookListDiv = document.querySelector(".book-list");
 
-const myLib = new Library([drizzt_1, hobbit, cradle_1, Katabasis], divList);
-
-// tests
-console.log(myLib.listTitles());
+const myLib = new Library([drizzt_1, hobbit, cradle_1, Katabasis], bookListDiv);
 myLib.render();
+
+// Button Functions ---------------------------------------------------------
+
+document.querySelector("#refreshList").addEventListener("click", function () {
+  myLib.clear();
+  // console.log('book list div refreshed')
+});
