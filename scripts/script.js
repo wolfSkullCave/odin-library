@@ -106,10 +106,36 @@ function clearBookList() {
   }
 }
 
-
 // Add new book form ----------------------------------------------------------------
 
-document.getElementById("newBookForm").addEventListener("submit", function (e) {
+// Setup custom validation messages
+const titleInput = document.getElementById("title");
+const authorInput = document.getElementById("author");
+const pagesInput = document.getElementById("pages");
+const readRadio = document.querySelector('input[name="read"]:checked');
+
+titleInput.addEventListener("invalid", function () {
+  this.setCustomValidity("The book title must be filled!");
+});
+titleInput.addEventListener("input", function () {
+  this.setCustomValidity("");
+});
+
+authorInput.addEventListener("invalid", function () {
+  this.setCustomValidity("The author name must be filled!");
+});
+authorInput.addEventListener("input", function () {
+  this.setCustomValidity("");
+});
+
+pagesInput.addEventListener("invalid", function () {
+  this.setCustomValidity("The number of pages must be filled!");
+});
+pagesInput.addEventListener("input", function () {
+  this.setCustomValidity("");
+});
+
+document.getElementById("bookForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
   const title = document.getElementById("title").value.trim();
@@ -120,4 +146,5 @@ document.getElementById("newBookForm").addEventListener("submit", function (e) {
   const newBook = new Book(title, author, pages, read);
   library.push(newBook);
   renderAllBooks();
+  document.getElementById("bookForm").reset();
 });

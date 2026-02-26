@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -34,20 +34,26 @@
             <h3>New book form</h3>
             <form action="" id="bookForm">
               <fieldset class="form-grid">
-                <label for="title">Book title</label>
-                <input type="text" name="title" id="title" />
+                <label for="title">Book title *</label>
+                <input type="text" name="title" id="title" required />
 
-                <label for="author">Author</label>
-                <input type="text" name="author" id="author" />
+                <label for="author">Author *</label>
+                <input type="text" name="author" id="author" required />
 
-                <label for="pages">Number of pages</label>
-                <input type="text" name="pages" id="pages" />
+                <label for="pages">Number of pages *</label>
+                <input type="text" name="pages" id="pages" required />
               </fieldset>
 
               <fieldset class="readStatus">
-                <legend>Have you read this book yet?</legend>
+                <legend>Have you read this book yet? *</legend>
                 <!-- <label for="read">Have you read this book yet?</label> -->
-                <input type="radio" name="read" id="read-yes" value="true" />
+                <input
+                  type="radio"
+                  name="read"
+                  id="read-yes"
+                  value="true"
+                  required
+                />
                 <label for="read-yes">Yes</label>
                 <input type="radio" name="read" id="read-no" value="false" />
                 <label for="read-no">No</label>
@@ -59,8 +65,8 @@
       </div>
 
       <div class="footer">
-          <img src="assets/github-mark-white.png" alt="" />
-          <a href="http://github.com/wolfSkullCave"> Follow me on GitHub </a>
+        <img src="assets/github-mark-white.png" alt="" />
+        <a href="http://github.com/wolfSkullCave"> Follow me on GitHub </a>
       </div>
     </div>
     <script src="scripts/script.js"></script>
