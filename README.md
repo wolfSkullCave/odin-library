@@ -4,9 +4,9 @@ A simple JavaScript Library app built as part of [The Odin Project](https://www.
 
 ## 📷 View Demo
 
-*(Screenshot coming soon)*
+[![Preview](preview.png)](https://wolfskullcave.github.io/odin-library/)
 
-[Link to demo](https://wolfskullcave.github.io/odin-library/)
+[open in browser](https://wolfskullcave.github.io/odin-library/)
 
 
 ## 🚀 Features
